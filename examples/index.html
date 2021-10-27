@@ -12,7 +12,11 @@
         console.log('gsdmypromise')
         resolve('gsda')
         reject('gsdb')
-    }).then()
+    }).then(result => {
+        console.log('gsdresult')
+    }, reason => {
+        console.log('gsdreason', reason)
+    })
     console.log(promise.then().then())
 </script>
 </html>
