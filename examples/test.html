@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="../dist/dist.js"></script>
 </head>
 <body>
+
 </body>
 <script>
-    let promise = new mypromise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
         console.log('gsdmypromise')
         resolve('gsda')
-        // reject('gsdb')
+        reject('gsdb')
     }).then(result => {
         console.log('gsdresult', result)
-        return 'gsd666'
+        return result
     }, reason => {
         console.log('gsdreason', reason)
     }).then(result => {
@@ -22,6 +22,5 @@
     }, reason => {
         console.log('gsdreason', reason)
     })
-    console.log(promise.then())
 </script>
 </html>

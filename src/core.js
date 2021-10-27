@@ -2,6 +2,8 @@ module.exports = Promise;
 
 function noop() {}
 
+var IS_ERROR = {};
+
 function Promise(fn) {
     this._state = 0;
     this._value = null;
@@ -21,6 +23,11 @@ function handle(self, deferred) {
 function handleResolved(self, deferred) {
     var cb = self._state === 1 ? deferred.onFulfilled : deferred.onRejected;
     var ret = tryCallOne(cb, self._value);
+    if (ret === IS_ERROR) {
+
+    }else {
+        resolve(deferred.promise, ret);
+    }
 }
 
 function Handler(onFulfilled, onRejected, promise){
