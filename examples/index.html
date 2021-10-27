@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../dist/dist.js"></script>
+</head>
+<body>
+</body>
+<script>
+    let promise = new mypromise((resolve, reject) => {
+        console.log('gsdmypromise')
+        resolve('gsda')
+        reject('gsdb')
+    })
+    console.log(promise)
+</script>
+</html>
