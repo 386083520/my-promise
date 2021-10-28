@@ -71,11 +71,14 @@ function reject(self, newValue) {
 }
 
 function doResolve(fn, promise) {
+    var done = false;
     var res = tryCallTwo(fn, function (value) {
-        console.log('gsdresolve', value)
+        if (done) return;
+        done = true;
         resolve(promise, value);
     }, function (reason) {
-        console.log('gsdreject', reason)
+        if (done) return;
+        done = true;
         reject(promise, reason);
     })
 }

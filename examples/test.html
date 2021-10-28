@@ -11,7 +11,7 @@
     let promise = new Promise((resolve, reject) => {
         console.log('gsdmypromise')
         resolve('gsda')
-        // reject('gsdb')
+        reject('gsdb')
     }).then(result => {
         console.log('gsdresult', result)
         return 'gsd666'
