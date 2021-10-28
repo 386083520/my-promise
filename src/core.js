@@ -7,6 +7,8 @@ var IS_ERROR = {};
 function Promise(fn) {
     this._state = 0;
     this._value = null;
+    this._deferredState = 0;
+    this._deferreds = null;
     doResolve(fn, this);
 }
 
@@ -17,6 +19,19 @@ Promise.prototype.then = function(onFulfilled, onRejected) {
 }
 
 function handle(self, deferred) {
+    if (self._state === 0) {
+        if (self._deferredState === 0) {
+            self._deferredState = 1;
+            self._deferreds = deferred;
+            console.log('gsdself', self)
+            return
+        }
+        if (self._deferredState === 1) {
+            return;
+        }
+        self._deferreds.push(deferred);
+        return;
+    }
     handleResolved(self, deferred);
 }
 
@@ -39,6 +54,13 @@ function Handler(onFulfilled, onRejected, promise){
 function resolve(self, newValue) {
     self._state = 1;
     self._value = newValue;
+    finale(self);
+}
+
+function finale(self) {
+    if (self._deferredState === 1) {
+        handle(self, self._deferreds);
+    }
 }
 
 function reject(self, newValue) {
