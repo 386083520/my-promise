@@ -36,13 +36,15 @@ function handle(self, deferred) {
 }
 
 function handleResolved(self, deferred) {
-    var cb = self._state === 1 ? deferred.onFulfilled : deferred.onRejected;
-    var ret = tryCallOne(cb, self._value);
-    if (ret === IS_ERROR) {
+    setTimeout(() => {
+        var cb = self._state === 1 ? deferred.onFulfilled : deferred.onRejected;
+        var ret = tryCallOne(cb, self._value);
+        if (ret === IS_ERROR) {
 
-    }else {
-        resolve(deferred.promise, ret);
-    }
+        }else {
+            resolve(deferred.promise, ret);
+        }
+    }, 0)
 }
 
 function Handler(onFulfilled, onRejected, promise){

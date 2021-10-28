@@ -10,9 +10,7 @@
 <script>
     let promise = new Promise((resolve, reject) => {
         console.log('gsdmypromise')
-        setTimeout(() => {
-            resolve('gsda')
-        })
+        resolve('gsda')
         // reject('gsdb')
     }).then(result => {
         console.log('gsdresult', result)
@@ -20,11 +18,7 @@
     }, reason => {
         console.log('gsdreason', reason)
         return 'gsd777'
-    }).then(result => {
-        console.log('gsdresult', result)
-    }, reason => {
-        console.log('gsdreason', reason)
     })
-    console.log(promise.then())
+    console.log('gsdfinish')
 </script>
 </html>
