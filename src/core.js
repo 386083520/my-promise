@@ -19,6 +19,10 @@ Promise.prototype.then = function(onFulfilled, onRejected) {
 }
 
 function handle(self, deferred) {
+    while (self._state === 3) {
+        self = self._value;
+    }
+    console.log('gsdself666', self)
     if (self._state === 0) {
         if (self._deferredState === 0) {
             self._deferredState = 1;
@@ -54,9 +58,32 @@ function Handler(onFulfilled, onRejected, promise){
 }
 
 function resolve(self, newValue) {
+    if (
+        newValue &&
+        (typeof newValue === 'object' || typeof newValue === 'function')
+    ) {
+        var then = getThen(newValue);
+        if (
+            then === self.then &&
+            newValue instanceof Promise
+        ) {
+            self._state = 3;
+            self._value = newValue;
+            finale(self);
+            return;
+        }
+    }
     self._state = 1;
     self._value = newValue;
     finale(self);
+}
+
+function getThen(obj) {
+    try {
+        return obj.then;
+    } catch (ex) {
+
+    }
 }
 
 function finale(self) {

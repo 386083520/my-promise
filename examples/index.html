@@ -8,7 +8,7 @@
 <body>
 </body>
 <script>
-    let promise = new mypromise((resolve, reject) => {
+    /*let promise = new mypromise((resolve, reject) => {
         console.log('gsdmypromise')
         resolve('gsda')
         reject('gsdb')
@@ -19,6 +19,30 @@
         console.log('gsdreason', reason)
         return 'gsd777'
     })
-    console.log('gsdfinish')
+    console.log('gsdfinish')*/
+    const setDelay = (millisecond) => {
+        return new mypromise((resolve, reject)=>{
+            setTimeout(()=> {
+                resolve(`我延迟了${millisecond}毫秒后输出的`)
+                // reject('error')
+            }, millisecond)
+        })
+    }
+
+    const setDelaySecond = (seconds) => {
+        return new mypromise((resolve, reject)=>{
+            if (typeof seconds != 'number' || seconds > 10) reject(new Error('参数必须是number类型，并且小于等于10'));
+            setTimeout(()=> {
+                resolve(2000)
+            }, seconds * 1000)
+        })
+    }
+    setDelay(2000).then(result => {
+        console.log(result)
+        return setDelaySecond(3)
+    }).then(result => {
+        console.log('gsdresult', result)
+        console.log('here')
+    })
 </script>
 </html>
