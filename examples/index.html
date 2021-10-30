@@ -22,12 +22,14 @@
         return new mypromise((resolve, reject)=>{
             if (typeof seconds != 'number' || seconds > 10) reject(new Error('setDelaySecond参数必须是number类型，并且小于等于10'));
             setTimeout(()=> {
-                resolve(2000)
+                resolve(seconds)
             }, seconds * 1000)
         })
     }
     mypromise.all([setDelay(20000), setDelaySecond(5)]).then(res => {
         console.log(res)
+    }, err => {
+        console.log(err)
     })
 </script>
 </html>

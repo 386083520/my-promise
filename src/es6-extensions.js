@@ -23,6 +23,7 @@ Promise.all = function (arr) {
                         res(i, val);
                     }, reject);
                 }
+                return
             }
             args[i] = val;
             if (--remaining === 0) {
