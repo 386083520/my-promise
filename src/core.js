@@ -42,6 +42,14 @@ function handle(self, deferred) {
 function handleResolved(self, deferred) {
     setTimeout(() => {
         var cb = self._state === 1 ? deferred.onFulfilled : deferred.onRejected;
+        if (cb === null) {
+            if (self._state === 1) {
+                resolve(deferred.promise, self._value);
+            }else {
+                reject(deferred.promise, self._value);
+            }
+            return
+        }
         var ret = tryCallOne(cb, self._value);
         if (ret === IS_ERROR) {
 
@@ -52,8 +60,8 @@ function handleResolved(self, deferred) {
 }
 
 function Handler(onFulfilled, onRejected, promise){
-    this.onFulfilled = onFulfilled;
-    this.onRejected = onRejected;
+    this.onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : null;
+    this.onRejected = typeof onRejected === 'function' ? onRejected : null;
     this.promise = promise;
 }
 
