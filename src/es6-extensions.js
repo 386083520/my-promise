@@ -2,6 +2,7 @@ var Promise = require('./core.js');
 
 
 Promise.resolve = function (value) {
+    if (value instanceof Promise) return value;
     console.log('gsdresolve', value)
 }
 
@@ -33,6 +34,13 @@ Promise.all = function (arr) {
         for (var i = 0; i < args.length; i++) {
             res(i, args[i]);
         }
+    })
+}
+Promise.race = function (values) {
+    return new Promise(function (resolve, reject) {
+        iterableToArray(values).forEach(function(value){
+            Promise.resolve(value).then(resolve, reject)
+        })
     })
 }
 Promise.reject = function (value) {

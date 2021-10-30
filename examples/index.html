@@ -26,7 +26,7 @@
             }, seconds * 1000)
         })
     }
-    mypromise.all([setDelay(20000), setDelaySecond(5)]).then(res => {
+    mypromise.race([setDelay(2000), setDelaySecond(5)]).then(res => {
         console.log(res)
     }, err => {
         console.log(err)
