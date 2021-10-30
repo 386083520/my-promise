@@ -8,7 +8,7 @@
 
 </body>
 <script>
-    let promise = new Promise((resolve, reject) => {
+    /*let promise = new Promise((resolve, reject) => {
         console.log('gsdmypromise')
         resolve('gsda')
     }).then(result => {
@@ -17,6 +17,29 @@
     }, reason => {
         console.log('gsdreason', reason)
     })
-    console.log('gsdfinish')
+    console.log('gsdfinish')*/
+
+    const setDelay = (millisecond) => {
+        return new Promise((resolve, reject)=>{
+            if (typeof millisecond != 'number' || millisecond > 10000) reject(new Error('setDelay参数必须是number类型，并且小于等于10'));
+            setTimeout(()=> {
+                resolve(`我延迟了${millisecond}毫秒后输出的`)
+                // reject('error')
+            }, millisecond)
+        })
+    }
+
+    const setDelaySecond = (seconds) => {
+        return new Promise((resolve, reject)=>{
+            if (typeof seconds != 'number' || seconds > 10) reject(new Error('setDelaySecond参数必须是number类型，并且小于等于10'));
+            setTimeout(()=> {
+                resolve(2000)
+            }, seconds * 1000)
+        })
+    }
+    Promise.all([setDelay(20000), setDelaySecond(5)]).then(res => {
+        console.log(res)
+    })
+
 </script>
 </html>
