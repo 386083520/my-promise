@@ -6,6 +6,13 @@ var IS_ERROR = {};
 var LAST_ERROR = null;
 
 function Promise(fn) {
+    console.log('gsdthis', this)
+    if (typeof this !== 'object') {
+        throw new TypeError('Promises must be constructed via new');
+    }
+    if (typeof fn !== 'function') {
+        throw new TypeError('Promise constructor\'s argument is not a function');
+    }
     this._state = 0;
     this._value = null;
     this._deferredState = 0;
