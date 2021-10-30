@@ -20,6 +20,8 @@ function Promise(fn) {
     doResolve(fn, this);
 }
 
+Promise._noop = noop;
+
 Promise.prototype.then = function(onFulfilled, onRejected) {
     var res = new Promise(noop);
     handle(this, new Handler(onFulfilled, onRejected, res));

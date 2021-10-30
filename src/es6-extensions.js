@@ -1,9 +1,19 @@
 var Promise = require('./core.js');
 
 
+function valuePromise(value) {
+    var p = new Promise(Promise._noop);
+    p._state = 1;
+    p._value = value;
+    return p;
+}
+
 Promise.resolve = function (value) {
     if (value instanceof Promise) return value;
-    console.log('gsdresolve', value)
+    if (typeof value === 'object' || typeof value === 'function') {
+
+    }
+    return valuePromise(value);
 }
 
 var iterableToArray = function (iterable) {

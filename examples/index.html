@@ -18,18 +18,8 @@
         })
     }
 
-    const setDelaySecond = (seconds) => {
-        return new mypromise((resolve, reject)=>{
-            if (typeof seconds != 'number' || seconds > 10) reject(new Error('setDelaySecond参数必须是number类型，并且小于等于10'));
-            setTimeout(()=> {
-                resolve(seconds)
-            }, seconds * 1000)
-        })
-    }
-    mypromise.race([setDelay(2000), setDelaySecond(5)]).then(res => {
+    mypromise.resolve('gsd666').then(res => {
         console.log(res)
-    }, err => {
-        console.log(err)
     })
 </script>
 </html>
