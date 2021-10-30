@@ -13,12 +13,21 @@
         resolve('gsda')
     }).then(result => {
         console.log('gsdresult', result)
+        return mypromise.reject('gsdreject')
+    }, reason => {
+        console.log('gsdreason', reason)
+    }).then(result => {
+        console.log('gsdresult1', result)
+    }, reason => {
+        console.log('gsdreason1', reason)
+    })
+    console.log('gsdfinish', promise)
+
+    /*mypromise.reject('gsdreject').then(result => {
+        console.log('gsdresult', result)
         throw new Error('gsderr')
     }, reason => {
         console.log('gsdreason', reason)
-    })
-    console.log('gsdfinish', promise)
-    mypromise.resolve('gsdresolve')
-    promise.finally()
+    })*/
 </script>
 </html>

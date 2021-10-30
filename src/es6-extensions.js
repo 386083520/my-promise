@@ -8,5 +8,7 @@ Promise.all = function (arr) {
     console.log('gsdall', arr)
 }
 Promise.reject = function (value) {
-    console.log('gsdreject', value)
+    return new Promise(function (resolve, reject) {
+        reject(value);
+    });
 }
