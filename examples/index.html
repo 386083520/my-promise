@@ -10,8 +10,9 @@
 <script>
     let promise = new mypromise((resolve, reject) => {
         console.log('gsdmypromise')
-        resolve('gsda')
-    }).then().then(result => {
+        // resolve('gsda')
+        throw new Error('gsderr')
+    }).then(result => {
         console.log('gsdresult', result)
     }, reason => {
         console.log('gsdreason', reason)

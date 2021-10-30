@@ -3,6 +3,7 @@ module.exports = Promise;
 function noop() {}
 
 var IS_ERROR = {};
+var LAST_ERROR = null;
 
 function Promise(fn) {
     this._state = 0;
@@ -116,6 +117,10 @@ function doResolve(fn, promise) {
         done = true;
         reject(promise, reason);
     })
+    if (!done && res === IS_ERROR) {
+        done = true;
+        reject(promise, LAST_ERROR);
+    }
 }
 
 function tryCallOne(fn, a) {
@@ -130,6 +135,7 @@ function tryCallTwo(fn, a, b) {
     try {
         fn(a, b);
     } catch (ex) {
-
+        LAST_ERROR = ex;
+        return IS_ERROR;
     }
 }
