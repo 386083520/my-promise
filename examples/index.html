@@ -8,7 +8,7 @@
 <body>
 </body>
 <script>
-    mypromise((resolve, reject) => {
+    let promise = new mypromise((resolve, reject) => {
         console.log('gsdmypromise')
         resolve('gsda')
     }).then(result => {
@@ -17,6 +17,8 @@
     }, reason => {
         console.log('gsdreason', reason)
     })
-    console.log('gsdfinish')
+    console.log('gsdfinish', promise)
+    mypromise.resolve('gsdresolve')
+    promise.finally()
 </script>
 </html>
