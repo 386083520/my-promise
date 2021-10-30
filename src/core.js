@@ -23,12 +23,10 @@ function handle(self, deferred) {
     while (self._state === 3) {
         self = self._value;
     }
-    console.log('gsdself666', self)
     if (self._state === 0) {
         if (self._deferredState === 0) {
             self._deferredState = 1;
             self._deferreds = deferred;
-            console.log('gsdself', self)
             return
         }
         if (self._deferredState === 1) {
@@ -53,7 +51,7 @@ function handleResolved(self, deferred) {
         }
         var ret = tryCallOne(cb, self._value);
         if (ret === IS_ERROR) {
-
+            reject(deferred.promise, LAST_ERROR);
         }else {
             resolve(deferred.promise, ret);
         }
@@ -104,6 +102,7 @@ function finale(self) {
 function reject(self, newValue) {
     self._state = 2;
     self._value = newValue;
+    finale(self);
 }
 
 function doResolve(fn, promise) {
@@ -127,7 +126,8 @@ function tryCallOne(fn, a) {
     try {
         return fn(a);
     } catch (ex) {
-
+        LAST_ERROR = ex;
+        return IS_ERROR;
     }
 }
 

@@ -10,12 +10,16 @@
 <script>
     let promise = new mypromise((resolve, reject) => {
         console.log('gsdmypromise')
-        // resolve('gsda')
-        throw new Error('gsderr')
+        resolve('gsda')
     }).then(result => {
         console.log('gsdresult', result)
+        throw new Error('gsderr')
     }, reason => {
         console.log('gsdreason', reason)
+    }).then(result => {
+        console.log('gsdresult1', result)
+    }, reason => {
+        console.log('gsdreason1', reason)
     })
     console.log('gsdfinish')
 </script>
